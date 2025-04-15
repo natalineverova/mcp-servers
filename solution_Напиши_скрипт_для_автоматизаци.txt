@@ -1,0 +1,23 @@
+import os
+import shutil
+from datetime import datetime
+
+# Указываем путь к папке с важными файлами
+source_dir = '/path/to/important/files'
+
+# Указываем путь к папке для резервных копий
+backup_dir = '/path/to/backup/folder'
+
+# Получаем текущую дату для формирования имени папки бэкапа
+current_date = datetime.now().strftime("%Y-%m-%d")
+
+# Формируем полный путь к папке с бэкапом на текущую дату
+destination_dir = os.path.join(backup_dir, current_date)
+
+# Создаем папку для бэкапа, если она не существует
+os.makedirs(destination_dir, exist_ok=True)
+
+# Копируем все файлы и подпапки из исходной папки в папку бэкапа
+shutil.copytree(source_dir, destination_dir, dirs_exist_ok=True)
+
+print(f"Backup created successfully at {destination_dir}")
