@@ -14,10 +14,12 @@ current_date = datetime.now().strftime("%Y-%m-%d")
 # Create the full path to the new subfolder with the current date
 new_backup_dir = os.path.join(backup_dir, current_date)
 
-# Create a new subfolder if it does not exist
+# Create a new subfolder if it doesn't exist
 if not os.path.exists(new_backup_dir):
     os.makedirs(new_backup_dir)
 
 # Copy all files from the source directory to the new backup directory
 for filename in os.listdir(source_dir):
-    shutil.copy(os.path.join(source_dir, filename), new_backup_dir)
+    file_path = os.path.join(source_dir, filename)
+    if os.path.isfile(file_path):
+        shutil.copy(file_path, new_backup_dir)
