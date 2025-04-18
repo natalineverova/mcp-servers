@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Параметры исходной БД 
+DB_HOST="localhost"
+DB_NAME="mydb"
+DB_USER="postgres"
+
+# Каталог для сохранения бэкапов
+BACKUP_DIR="/path/to/backup/directory"
+
+# Текущая дата для имени файла
+DATE=$(date +"%Y-%m-%d")
+
+# Создание дампа БД
+pg_dump -h $DB_HOST -U $DB_USER -d $DB_NAME > $BACKUP_DIR/db_backup_$DATE.sql
+
+# Проверка результата
+if [ $? -eq 0 ]; then
+  echo "Database backup created successfully."
+else
+  echo "Error occurred during backup creation."
+fi
